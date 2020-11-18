@@ -118,7 +118,3 @@ client.on('message', msg => {
   }; //본인인지 채크
 }); //client.on
 client.login(config.token);
-
-function send(msg) {
-  msg.channel.send(msg)
-}
