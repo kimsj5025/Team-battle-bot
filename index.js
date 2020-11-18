@@ -16,6 +16,18 @@ client.on('ready', () => {
 
 client.on('message', msg => {
 
+  var commad = msg.content
+
+  if (commad.startsWith('!')) {
+    console.log('!');
+  }
+  if (command === '?') {
+    console.log('갈고리 수집중');
+  }
+
+
+
+
   if (msg.author.username !== '접수원 키노피오') {
 
 
