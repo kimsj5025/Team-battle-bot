@@ -28,16 +28,10 @@ client.on('message', msg => {
         var sentence = sentence + '\n' + code[i]
         i++
       }
-      if (isLev(code[1])) {
-        fs.writeFile(`./text/${code[1]}`, sentence, 'utf8', function(error){
+      fs.writeFile(`./text/${code[1]}`, sentence, 'utf8', function(error){
 
-          console.log('writeFile is success!');
-          msg.channel.send(`${msg.author.username},\nYour level is submitted!`)
-      } else {
-
-        msg.channel.send('ㅈㅅ 그거 코드 아님')
-
-      }
+        console.log('writeFile is success!');
+        msg.channel.send(`${msg.author.username},\nYour level is submitted!`)
 
       });
     }
