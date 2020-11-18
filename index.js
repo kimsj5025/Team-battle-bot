@@ -18,12 +18,6 @@ client.on('message', msg => {
 
   var commad = msg.content
 
-  if (commad.startsWith('!')) {
-    console.log('!');
-  }
-  if (command === '?') {
-    console.log('갈고리 수집중');
-  }
 
 
 
@@ -124,3 +118,7 @@ client.on('message', msg => {
   }; //본인인지 채크
 }); //client.on
 client.login(config.token);
+
+function send(msg) {
+  msg.channel.send(msg)
+}
