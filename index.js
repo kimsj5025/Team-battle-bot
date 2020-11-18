@@ -118,12 +118,3 @@ client.on('message', msg => {
   }; //본인인지 채크
 }); //client.on
 client.login(config.token);
-
-function isLev(code) {
-  var code = code.split('-')
-  if (code.length === 3) {
-    return true;
-  } else {
-    msg.channel.send('s')
-  }
-}
