@@ -93,7 +93,7 @@ client.on('message', msg => {
       }
     }
 /*------------------------------------------------------------------------------------*/
-    if(msg.content.startsWith('!game ')) {
+    if(msg.content.startsWith('!play ')) {
       var code = msg.content.split(' ') //coed =array
       msg.channel.send('Game is update!')
       var game = ''
@@ -105,6 +105,36 @@ client.on('message', msg => {
       client.user.setActivity(game, { type: 'PLAYING' })
       console.log(`Game has updata by ${msg.author.username}`);
     }
+
+
+    if(msg.content.startsWith('!watch ')) {
+      var code = msg.content.split(' ') //coed =array
+      msg.channel.send('Game is update!')
+      var game = ''
+      var i = 1
+      while (i < code.length) {
+        var game = game + ' ' +code[i]
+        i++
+      }
+      client.user.setActivity(game, { type: 'WATCHING' })
+      console.log(`Game has updata by ${msg.author.username}`);
+    }
+
+//LISTENING, WATCHING, PLAYING
+
+    if(msg.content.startsWith('!listen ')) {
+      var code = msg.content.split(' ') //coed =array
+      msg.channel.send('Game is update!')
+      var game = ''
+      var i = 1
+      while (i < code.length) {
+        var game = game + ' ' +code[i]
+        i++
+      }
+      client.user.setActivity(game, { type: 'LISTENING' })
+      console.log(`Game has updata by ${msg.author.username}`);
+    }
+
 
 
 
