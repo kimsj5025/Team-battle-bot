@@ -131,7 +131,7 @@ client.on('message', msg => {
     }
     if(commad === '!code') {
       msg.channel.send(`Team battle bot\'s source code is
-      https://github.com/kimsj5025/Team-battle-bot.git`)
+https://github.com/kimsj5025/Team-battle-bot.git`)
     }
 
 
