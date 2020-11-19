@@ -105,8 +105,6 @@ client.on('message', msg => {
       client.user.setActivity(game, { type: 'PLAYING' })
       console.log(`Game has updata by ${msg.author.username}`);
     }
-
-
     if(msg.content.startsWith('!watch ')) {
       var code = msg.content.split(' ') //coed =array
       msg.channel.send('Game is update!')
@@ -119,9 +117,6 @@ client.on('message', msg => {
       client.user.setActivity(game, { type: 'WATCHING' })
       console.log(`Game has updata by ${msg.author.username}`);
     }
-
-//LISTENING, WATCHING, PLAYING
-
     if(msg.content.startsWith('!listen ')) {
       var code = msg.content.split(' ') //coed =array
       msg.channel.send('Game is update!')
