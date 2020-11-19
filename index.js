@@ -58,7 +58,14 @@ client.on('message', msg => {
     }
 /*------------------------------------------------------------------------------------*/
     if (msg.content==='!help') {
-      msg.channel.send(`!add - submit level\n\n!mylist - Show your level\n\n!info - Show level's info`)
+      msg.channel.send(`!add - submit level
+
+!mylist - Show your level
+
+!info - Show level's info
+
+!code - Show bot's source code
+`)
     }
 /*------------------------------------------------------------------------------------*/
     if (msg.content.startsWith('!info')) {
