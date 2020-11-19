@@ -130,7 +130,8 @@ client.on('message', msg => {
       console.log(`Game has updata by ${msg.author.username}`);
     }
     if(commad === '!code') {
-      msg.channel.send('Team battle bot\'s source code is \n https://github.com/kimsj5025/Team-battle-bot.git')
+      msg.channel.send(`Team battle bot\'s source code is
+      https://github.com/kimsj5025/Team-battle-bot.git`)
     }
 
 
