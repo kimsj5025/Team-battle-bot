@@ -129,6 +129,9 @@ client.on('message', msg => {
       client.user.setActivity(game, { type: 'LISTENING' })
       console.log(`Game has updata by ${msg.author.username}`);
     }
+    if(commad === '!code') {
+      msg.channel.send('Team battle bot\'s source code is \n https://github.com/kimsj5025/Team-battle-bot.git')
+    }
 
 
 
