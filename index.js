@@ -1,6 +1,5 @@
 var Discord = require('discord.js'); // discord.js를 불러옴
 var client = new Discord.Client(); // 새로운 디스코드 클라이언트를 만듬
-var config = require('./Config.json'); //config.json 파일을 불러옴
 var fs = require('fs'); //fs 파일을 불러옴
 var game = '피치성 공사'
 var i = 0
