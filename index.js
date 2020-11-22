@@ -163,4 +163,4 @@ https://github.com/kimsj5025/Team-battle-bot.git`)
 app.listen(port, () => {
   console.log(`Server is listening on ${port}`);
 });
-client.login(config.token);
+client.login(process.env.TOKEN);
