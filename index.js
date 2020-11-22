@@ -35,6 +35,7 @@ client.on('message', msg => {
         var sentence = sentence + '\n' + code[i]
         i++
       }
+      var sentence = sentence + '\n'
       fs.writeFile(`./text/${code[1]}`, sentence, 'utf8', function(error){
 
         console.log('writeFile is success!');
