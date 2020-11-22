@@ -1,6 +1,3 @@
-const express = require('express');
-const app = express();
-const port = 80;
 var Discord = require('discord.js'); // discord.js를 불러옴
 var client = new Discord.Client(); // 새로운 디스코드 클라이언트를 만듬
 var config = require('./Config.json'); //config.json 파일을 불러옴
@@ -160,7 +157,4 @@ https://github.com/kimsj5025/Team-battle-bot.git`)
 
   }; //본인인지 채크
 }); //client.on
-app.listen(port, () => {
-  console.log(`Server is listening on ${port}`);
-});
 client.login(config.token);
