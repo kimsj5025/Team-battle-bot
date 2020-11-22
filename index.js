@@ -155,4 +155,4 @@ https://github.com/kimsj5025/Team-battle-bot.git`)
 
   }; //본인인지 채크
 }); //client.on
-client.login(process.TOKEN);
+client.login(process.env.TOKEN);
