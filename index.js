@@ -5,9 +5,6 @@ var fs = require('fs'); //fs 파일을 불러옴
 var game = '피치성 공사'
 var i = 0
 console.log(`Starting bot...`);
-app.get('/', (req, res, next) => {
-  res.send('Hello, Heroku!');
-});
 
 
 
