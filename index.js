@@ -43,7 +43,7 @@ client.on('message', msg => {
       });
     }
 /*------------------------------------------------------------------------------------*/
-    if (msg.content.startsWith('!list')) {
+    if (msg.content === '!list') {
       fs.readdir('./text', function(error, filelist){
         if (filelist === '') {
           msg.channel.send(`\nWe have no level`)
@@ -137,7 +137,7 @@ client.on('message', msg => {
         var game = game + ' ' +code[i]
         i++
       }
-      client.user.setActivity(game, { type: 'LISTENING' })
+      client.user.setActivity(game, { type: 'PLAYING' })
       console.log(`Game has updata by ${msg.author.username}`);
     }
     if(commad === '!code') {
