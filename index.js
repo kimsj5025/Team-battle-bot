@@ -105,21 +105,22 @@ client.on('message', msg => {
 /*------------------------------------------------------------------------------------*/
     if (commad == '!game ') {
 
-    }else if (commad == '!game') {
-      msg.channel.send(`${type} ${game}`)
-    }
-    if(msg.content.startsWith('!play ')) {
       var code = msg.content.split(' ') //coed =array
       msg.channel.send('Game is update!')
       var game = ''
-      var i = 1
+      var i = 2
       while (i < code.length) {
         var game = game + ' ' +code[i]
         i++
       }
-      client.user.setActivity(game, { type: 'PLAYING' })
+      client.user.setActivity(game, { type: code[1] })
       console.log(`Game has updata by ${msg.author.username}`);
+
+    }else if (commad == '!game') {
+      msg.channel.send(`${type} ${game}`)
     }
+
+    //
     if(msg.content.startsWith('!watch ')) {
       var code = msg.content.split(' ') //coed =array
       msg.channel.send('Game is update!')
@@ -144,6 +145,7 @@ client.on('message', msg => {
       client.user.setActivity(game, { type: 'LISTENING' })
       console.log(`Game has updata by ${msg.author.username}`);
     }
+    //
     if(commad === '!code') {
       msg.channel.send(`Team battle bot\'s source code is
 https://github.com/kimsj5025/Team-battle-bot.git`)
