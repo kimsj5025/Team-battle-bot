@@ -5,7 +5,7 @@ var fs = require('fs'); //fs 파일을 불러옴
 var game = '피치성 공사'
 var i = 0
 console.log(`Starting bot...`);
-console.log(client.user);
+
 
 
 client.on('ready', () => {
@@ -23,7 +23,7 @@ client.on('message', msg => {
 
 
 
-  if (msg.author.username !== client.user.tag) {
+  if (msg.author.username !== 'Captain Toad') {
 
     if (msg.content.startsWith('!add')) {
       var code = msg.content.split(' ') //coed =array
@@ -49,6 +49,8 @@ client.on('message', msg => {
           msg.channel.send(`\nWe have no level`)
         }else {
           var dirs = `We're level list is\n`
+          var i = 0
+          console.log(filelist);
           while (i < filelist.length) {
             var dirs = dirs + '\n' +filelist[i]
             i++
