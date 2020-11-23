@@ -18,7 +18,7 @@ client.on('ready', () => {
 
 client.on('message', msg => {
 
-  var commad = msg.content
+  var command = msg.content
 
 
 
@@ -44,7 +44,7 @@ client.on('message', msg => {
       });
     }
 /*------------------------------------------------------------------------------------*/
-    if (msg.content.startsWith('!list')) {
+    if (msg.content === '!list') {
       fs.readdir('./text', function(error, filelist){
         if (filelist === '') {
           msg.channel.send(`\nWe have no level`)
@@ -103,50 +103,25 @@ client.on('message', msg => {
       }
     }
 /*------------------------------------------------------------------------------------*/
-    if (commad == '!game ') {
+    if (command === '!game ') {
+      var games = ['PLAYING','WATCHING','LISTENING']
+      var array = msg.content.split(' ') //coed =array
+      var game = '피치성 공사'
 
-      var code = msg.content.split(' ') //coed =array
-      msg.channel.send('Game is update!')
-      var game = ''
-      var i = 2
-      while (i < code.length) {
-        var game = game + ' ' +code[i]
-        i++
+      if (games.indexOf(array[1]) === 0) {
+        bot.user.setActivity(game, { type: games[0] });
       }
-      client.user.setActivity(game, { type: code[1] })
-      console.log(`Game has updata by ${msg.author.username}`);
-
-    }else if (commad == '!game') {
-      msg.channel.send(`${type} ${game}`)
-    }
-
-    //
-    if(msg.content.startsWith('!watch ')) {
-      var code = msg.content.split(' ') //coed =array
-      msg.channel.send('Game is update!')
-      var game = ''
-      var i = 1
-      while (i < code.length) {
-        var game = game + ' ' +code[i]
-        i++
+      if (games.indexOf(array[1]) === 1) {
+        bot.user.setActivity(game, { type: games[1] });
       }
-      client.user.setActivity(game, { type: 'WATCHING' })
-      console.log(`Game has updata by ${msg.author.username}`);
-    }
-    if(msg.content.startsWith('!listen ')) {
-      var code = msg.content.split(' ') //coed =array
-      msg.channel.send('Game is update!')
-      var game = ''
-      var i = 1
-      while (i < code.length) {
-        var game = game + ' ' +code[i]
-        i++
+      if (games.indexOf(array[1]) === 2) {
+        bot.user.setActivity(game, { type: games[2] });
       }
-      client.user.setActivity(game, { type: 'LISTENING' })
-      console.log(`Game has updata by ${msg.author.username}`);
+      if (games.indexOf(array[1]) === -1) {
+        msg.channel.send('a')
+      }
     }
-    //
-    if(commad === '!code') {
+    if(command === '!code') {
       msg.channel.send(`Team battle bot\'s source code is
 https://github.com/kimsj5025/Team-battle-bot.git`)
     }
