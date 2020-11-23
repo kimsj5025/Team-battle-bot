@@ -12,7 +12,7 @@ console.log(`Starting bot...`);
 client.on('ready', () => {
   console.log(`Discord bot is ready!`);
   console.log(`Login by ${client.user.tag}`);
-  client.user.setActivity(game, { type: 'PLAYING' })
+  client.user.setActivity(game, { type: type })
 });
 
 
@@ -44,7 +44,7 @@ client.on('message', msg => {
       });
     }
 /*------------------------------------------------------------------------------------*/
-    if (msg.content === '!list') {
+    if (msg.content.startsWith('!list')) {
       fs.readdir('./text', function(error, filelist){
         if (filelist === '') {
           msg.channel.send(`\nWe have no level`)
@@ -103,14 +103,8 @@ client.on('message', msg => {
       }
     }
 /*------------------------------------------------------------------------------------*/
-<<<<<<< HEAD
-
-
-    if(msg.content.startsWith('!watch ')) {
-=======
     if (commad == '!game ') {
 
->>>>>>> d53539d04705273d6e3b27a23619e64a27b17c2d
       var code = msg.content.split(' ') //coed =array
       msg.channel.send('Game is update!')
       var game = ''
@@ -119,23 +113,27 @@ client.on('message', msg => {
         var game = game + ' ' +code[i]
         i++
       }
-<<<<<<< HEAD
-      client.user.setActivity(game, { type: 'WATCHING' })
-=======
       client.user.setActivity(game, { type: code[1] })
->>>>>>> d53539d04705273d6e3b27a23619e64a27b17c2d
       console.log(`Game has updata by ${msg.author.username}`);
 
     }else if (commad == '!game') {
       msg.channel.send(`${type} ${game}`)
     }
-<<<<<<< HEAD
-    if(msg.content.startsWith('!listen ')) {
-=======
 
     //
     if(msg.content.startsWith('!watch ')) {
->>>>>>> d53539d04705273d6e3b27a23619e64a27b17c2d
+      var code = msg.content.split(' ') //coed =array
+      msg.channel.send('Game is update!')
+      var game = ''
+      var i = 1
+      while (i < code.length) {
+        var game = game + ' ' +code[i]
+        i++
+      }
+      client.user.setActivity(game, { type: 'WATCHING' })
+      console.log(`Game has updata by ${msg.author.username}`);
+    }
+    if(msg.content.startsWith('!listen ')) {
       var code = msg.content.split(' ') //coed =array
       msg.channel.send('Game is update!')
       var game = ''
@@ -145,18 +143,6 @@ client.on('message', msg => {
         i++
       }
       client.user.setActivity(game, { type: 'LISTENING' })
-      console.log(`Game has updata by ${msg.author.username}`);
-    }
-    if(msg.content.startsWith('!play ')) {
-      var code = msg.content.split(' ') //coed =array
-      msg.channel.send('Game is update!')
-      var game = ''
-      var i = 1
-      while (i < code.length) {
-        var game = game + ' ' +code[i]
-        i++
-      }
-      client.user.setActivity(game, { type: 'PLAYING' })
       console.log(`Game has updata by ${msg.author.username}`);
     }
     //
