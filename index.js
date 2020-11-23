@@ -24,7 +24,7 @@ client.on('message', msg => {
 
 
   if (msg.author.username !== client.user.tag) {
-    msg.channel.send(client.user.tag)
+    console.log(client.user.tag);
 
 
     if (msg.content.startsWith('!add')) {
