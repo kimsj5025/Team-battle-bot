@@ -103,24 +103,43 @@ client.on('message', msg => {
       }
     }
 /*------------------------------------------------------------------------------------*/
-    if (command === '!game ') {
-      var games = ['PLAYING','WATCHING','LISTENING']
-      var array = msg.content.split(' ') //coed =array
-      var game = '피치성 공사'
-
-      if (games.indexOf(array[1]) === 0) {
-        bot.user.setActivity(game, { type: games[0] });
-      }
-      if (games.indexOf(array[1]) === 1) {
-        bot.user.setActivity(game, { type: games[1] });
-      }
-      if (games.indexOf(array[1]) === 2) {
-        bot.user.setActivity(game, { type: games[2] });
-      }
-      if (games.indexOf(array[1]) === -1) {
-        msg.channel.send('a')
-      }
+//LISTENING, WATCHING, PLAYING
+  if(msg.content.startsWith('!watch ')) {
+    var code = msg.content.split(' ') //coed =array
+    msg.channel.send('Game is update!')
+    var game = ''
+    var i = 1
+    while (i < code.length) {
+      var game = game + ' ' +code[i]
+      i++
     }
+    client.user.setActivity(game, { type: 'WATCHING' })
+    console.log(`Game has updata by ${msg.author.username}`);
+  }
+  if(msg.content.startsWith('!listen ')) {
+  var code = msg.content.split(' ') //coed =array
+  msg.channel.send('Game is update!')
+  var game = ''
+  var i = 1
+  while (i < code.length) {
+    var game = game + ' ' +code[i]
+    i++
+  }
+  client.user.setActivity(game, { type: 'LISTENING' })
+  console.log(`Game has updata by ${msg.author.username}`);
+  }
+  if(msg.content.startsWith('!play ')) {
+  var code = msg.content.split(' ') //coed =array
+  msg.channel.send('Game is update!')
+  var game = ''
+  var i = 1
+  while (i < code.length) {
+    var game = game + ' ' +code[i]
+    i++
+  }
+  client.user.setActivity(game, { type: 'PLAYING' })
+  console.log(`Game has updata by ${msg.author.username}`);
+  }
     if(command === '!code') {
       msg.channel.send(`Team battle bot\'s source code is
 https://github.com/kimsj5025/Team-battle-bot.git`)
