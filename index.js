@@ -23,7 +23,7 @@ client.on('message', msg => {
 
 
 
-  if (msg.author.username !== '접수원 키노피오') {
+  if (msg.author.username !== client.user.tag) {
 
 
     if (msg.content.startsWith('!add')) {
