@@ -3,6 +3,7 @@ var client = new Discord.Client(); // 새로운 디스코드 클라이언트를 
 var config = require('./Config.json'); //config.json 파일을 불러옴
 var fs = require('fs'); //fs 파일을 불러옴
 var game = '피치성 공사'
+var type = 'playing'
 var i = 0
 console.log(`Starting bot...`);
 
@@ -102,21 +103,39 @@ client.on('message', msg => {
       }
     }
 /*------------------------------------------------------------------------------------*/
+<<<<<<< HEAD
 
 
     if(msg.content.startsWith('!watch ')) {
+=======
+    if (commad == '!game ') {
+
+>>>>>>> d53539d04705273d6e3b27a23619e64a27b17c2d
       var code = msg.content.split(' ') //coed =array
       msg.channel.send('Game is update!')
       var game = ''
-      var i = 1
+      var i = 2
       while (i < code.length) {
         var game = game + ' ' +code[i]
         i++
       }
+<<<<<<< HEAD
       client.user.setActivity(game, { type: 'WATCHING' })
+=======
+      client.user.setActivity(game, { type: code[1] })
+>>>>>>> d53539d04705273d6e3b27a23619e64a27b17c2d
       console.log(`Game has updata by ${msg.author.username}`);
+
+    }else if (commad == '!game') {
+      msg.channel.send(`${type} ${game}`)
     }
+<<<<<<< HEAD
     if(msg.content.startsWith('!listen ')) {
+=======
+
+    //
+    if(msg.content.startsWith('!watch ')) {
+>>>>>>> d53539d04705273d6e3b27a23619e64a27b17c2d
       var code = msg.content.split(' ') //coed =array
       msg.channel.send('Game is update!')
       var game = ''
@@ -140,6 +159,7 @@ client.on('message', msg => {
       client.user.setActivity(game, { type: 'PLAYING' })
       console.log(`Game has updata by ${msg.author.username}`);
     }
+    //
     if(commad === '!code') {
       msg.channel.send(`Team battle bot\'s source code is
 https://github.com/kimsj5025/Team-battle-bot.git`)
