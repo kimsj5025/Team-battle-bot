@@ -3,6 +3,7 @@ var client = new Discord.Client(); // 새로운 디스코드 클라이언트를 
 var config = require('./Config.json'); //config.json 파일을 불러옴
 var fs = require('fs'); //fs 파일을 불러옴
 var game = '피치성 공사'
+var type = 'playing'
 var i = 0
 console.log(`Starting bot...`);
 
@@ -11,7 +12,7 @@ console.log(`Starting bot...`);
 client.on('ready', () => {
   console.log(`Discord bot is ready!`);
   console.log(`Login by ${client.user.tag}`);
-  client.user.setActivity('피치성 공사', { type: 'PLAYING' })
+  client.user.setActivity(game, { type: type })
 });
 
 
@@ -50,7 +51,6 @@ client.on('message', msg => {
         }else {
           var dirs = `We're level list is\n`
           var i = 0
-          console.log(filelist);
           while (i < filelist.length) {
             var dirs = dirs + '\n' +filelist[i]
             i++
@@ -103,6 +103,11 @@ client.on('message', msg => {
       }
     }
 /*------------------------------------------------------------------------------------*/
+    if (commad == '!game ') {
+
+    }else if (commad == '!game') {
+      msg.channel.send(`${type} ${game}`)
+    }
     if(msg.content.startsWith('!play ')) {
       var code = msg.content.split(' ') //coed =array
       msg.channel.send('Game is update!')
