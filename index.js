@@ -5,13 +5,13 @@ var fs = require('fs'); //fs 파일을 불러옴
 var game = '피치성 공사'
 var i = 0
 console.log(`Starting bot...`);
-console.log(client.user);
+
 
 
 client.on('ready', () => {
   console.log(`Discord bot is ready!`);
   console.log(`Login by ${client.user.tag}`);
-  client.user.setActivity('피치성 공사', { type: 'PLAYING' })
+  client.user.setActivity(game, { type: 'PLAYING' })
 });
 
 
@@ -23,7 +23,7 @@ client.on('message', msg => {
 
 
 
-  if (msg.author.username !== client.user.tag) {
+  if (msg.author.username !== 'Captain Toad') {
 
     if (msg.content.startsWith('!add')) {
       var code = msg.content.split(' ') //coed =array
@@ -49,6 +49,7 @@ client.on('message', msg => {
           msg.channel.send(`\nWe have no level`)
         }else {
           var dirs = `We're level list is\n`
+          var i = 0
           while (i < filelist.length) {
             var dirs = dirs + '\n' +filelist[i]
             i++
@@ -101,18 +102,8 @@ client.on('message', msg => {
       }
     }
 /*------------------------------------------------------------------------------------*/
-    if(msg.content.startsWith('!play ')) {
-      var code = msg.content.split(' ') //coed =array
-      msg.channel.send('Game is update!')
-      var game = ''
-      var i = 1
-      while (i < code.length) {
-        var game = game + ' ' +code[i]
-        i++
-      }
-      client.user.setActivity(game, { type: 'PLAYING' })
-      console.log(`Game has updata by ${msg.author.username}`);
-    }
+
+
     if(msg.content.startsWith('!watch ')) {
       var code = msg.content.split(' ') //coed =array
       msg.channel.send('Game is update!')
@@ -126,6 +117,18 @@ client.on('message', msg => {
       console.log(`Game has updata by ${msg.author.username}`);
     }
     if(msg.content.startsWith('!listen ')) {
+      var code = msg.content.split(' ') //coed =array
+      msg.channel.send('Game is update!')
+      var game = ''
+      var i = 1
+      while (i < code.length) {
+        var game = game + ' ' +code[i]
+        i++
+      }
+      client.user.setActivity(game, { type: 'LISTENING' })
+      console.log(`Game has updata by ${msg.author.username}`);
+    }
+    if(msg.content.startsWith('!play ')) {
       var code = msg.content.split(' ') //coed =array
       msg.channel.send('Game is update!')
       var game = ''
