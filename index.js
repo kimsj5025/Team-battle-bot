@@ -3,10 +3,9 @@ var client = new Discord.Client(); // 새로운 디스코드 클라이언트를 
 var config = require('./Config.json'); //config.json 파일을 불러옴
 var fs = require('fs'); //fs 파일을 불러옴
 var game = '피치성 공사'
-var type = 'playing'
+var type = 'PLAYING'
 var i = 0
 console.log(`Starting bot...`);
-
 
 
 client.on('ready', () => {
@@ -140,7 +139,8 @@ client.on('message', msg => {
   client.user.setActivity(game, { type: 'PLAYING' })
   console.log(`Game has updata by ${msg.author.username}`);
   }
-    if(command === '!code') {
+/*------------------------------------------------------------------------------------*/
+  if(command === '!code') {
       msg.channel.send(`Team battle bot\'s source code is
 https://github.com/kimsj5025/Team-battle-bot.git`)
     }
@@ -155,6 +155,7 @@ https://github.com/kimsj5025/Team-battle-bot.git`)
 
 
 
-  }; //본인인지 채크
-}); //client.on
+  }; /*본인인지 채크*/}); //client.on
+
+
 client.login(process.env.TOKEN);
