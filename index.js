@@ -5,16 +5,13 @@ var fs = require('fs'); //fs 파일을 불러옴
 var game = '피치성 공사'
 var type = 'PLAYING'
 var i = 0
-const express = require('express');
-const app = express();
-const port = 80;
 console.log(`Starting bot...`);
 
 
 client.on('ready', () => {
   console.log(`Discord bot is ready!`);
   console.log(`Login by ${client.user.tag}`);
-  client.user.setActivity(game, { type: type })
+  client.user.setActivity(game, { type: 'PLAYING' })
 });
 
 
@@ -160,11 +157,5 @@ https://github.com/kimsj5025/Team-battle-bot.git`)
 
   }; /*본인인지 채크*/}); //client.on
 
-  app.get('/', (req, res, next) => {
-    res.send(`여긴 어케알고 찾아옴?`);
-  });
 
 client.login(process.env.TOKEN);
-app.listen(port, () => {
-  console.log(`Server is listening on ${port}`);
-});
