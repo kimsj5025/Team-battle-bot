@@ -159,4 +159,4 @@ https://github.com/kimsj5025/Team-battle-bot.git`)
 }); //client.on
 
 
-client.login('Nzc4NTg1MDQyMzg5NTY1NDYw.X7UH0w.Vpe1rfeiqpyLbRggf-cwOyZUUT0');
+client.login('');
