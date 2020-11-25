@@ -2,8 +2,7 @@ var Discord = require('discord.js'); // discord.js를 불러옴
 var client = new Discord.Client(); // 새로운 디스코드 클라이언트를 만듬
 var config = require('./Config.json'); //config.json 파일을 불러옴
 var fs = require('fs'); //fs 파일을 불러옴
-var game = '피치성 공사'
-var type = 'PLAYING'
+var game = 'Team battle bot'
 var i = 0
 console.log(`Starting bot...`);
 
@@ -19,22 +18,22 @@ client.on('message', msg => {
 
   var command = msg.content
 
+  var myname = client.user.tag.split('#')
 
 
 
 
-  if (msg.author.username !== 'Captain Toad') {
+  if (msg.author.username !== myname[0]) {
 
     if (msg.content.startsWith('!add')) {
       var code = msg.content.split(' ') //coed =array
-      var sentence = code[2]
+      var sentence = ''
       var i = 2
       while (i < code.length) {
 
         var sentence = sentence + '\n' + code[i]
         i++
       }
-      var sentence = sentence + '\n'
       fs.writeFile(`./text/${code[1]}`, sentence, 'utf8', function(error){
 
         console.log('writeFile is success!');
@@ -48,10 +47,15 @@ client.on('message', msg => {
         if (filelist === '') {
           msg.channel.send(`\nWe have no level`)
         }else {
-          var dirs = `We're level list is\n`
           var i = 0
+          var dirs = `We're level list is\n`
           while (i < filelist.length) {
+            //filelist는 맵 코드
+            var data = fs.readFileSync(`./text/${filelist[i]}`);
             var dirs = dirs + '\n' +filelist[i]
+            var data = data + '\n'
+            var data = data.split('\n')
+            var dirs = `${dirs} - \`${data[2]}\``
             i++
           }
           msg.channel.send(dirs)
@@ -62,7 +66,7 @@ client.on('message', msg => {
     if (msg.content==='!help') {
       msg.channel.send(`!add - submit level
 
-!mylist - Show your level
+!list - Show your level
 
 !info - Show level's info
 
@@ -75,7 +79,6 @@ client.on('message', msg => {
 
         var code = msg.content.split(' ') //coed =array
         fs.readFile(`./text/${code[1]}`, 'utf8', function(err, data) {
-          console.log(data);
 
           if (msg.content === '!info') {
 
@@ -84,15 +87,12 @@ client.on('message', msg => {
           } else {
             var data = data + '\n'
             var data = data.split('\n')
-            console.log(data);
             var i = 0
             var info = `${code[1]}'s info is...\n`
             while (i < data.length) {
                 var info = `${info}\n${data[i]}`
                 i++
-                console.log(data[i]);
               }
-            msg.channel.send(info)
 
             }
         })
@@ -159,4 +159,4 @@ https://github.com/kimsj5025/Team-battle-bot.git`)
 }); //client.on
 
 
-client.login(process.env.TOKEN);
+client.login('Nzc4NTg1MDQyMzg5NTY1NDYw.X7UH0w.Vpe1rfeiqpyLbRggf-cwOyZUUT0');
