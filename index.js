@@ -4,7 +4,7 @@ var config = require('./Config.json'); //config.json 파일을 불러옴
 var fs = require('fs'); //fs 파일을 불러옴
 var game = 'Team battle bot'
 var i = 0
-fs.mkdir('./text',{}function () {  
+fs.mkdir('./text',{}, function () {  
   console.log(`Starting bot...`);
 })
 
