@@ -37,28 +37,49 @@ client.on('message', msg => {
 
 //----------------------------------------------------------//
 
-    if (msg.content.startsWith('!add')) {
-      var code = msg.content.split(' ') //coed =array
-      var sentence = ''              //sentence = 123
-      var i = 2                         //i = 2
-      while (i < code.length) {
+  if (msg.content.startsWith('!add')) {
+    var code = msg.content.split(' ') //coed =array
+    var sentence = code[2]
+    var i = 2
+    while (i < code.length) {
 
-        var sentence = sentence + '\n' + code[i]
-        i++
-      }
-      console.log(sentence); //[<Level_style>]\n[<Level_title>]
-      console.log(code[1]); //[<Level_code>]
-      fs.writeFile(`./info/${code[1]}`, sentence, 'utf8', function (e) {
+      var sentence = sentence + '\n' + code[i]
+      i++
+    }
+    var sentence = sentence + '\n'
+    fs.writeFile(`info/${code[1]}`,sentence,function(err){
+       if (err === null) {
 
-        console.log('writeFile is success!');
-        msg.channel.send(`${msg.author.username},\nYour level is submitted!
+       console.log('writeFile is success!');
+       msg.channel.send(`${msg.author.username},\nYour level is submitted!
 
 Level code : ${code[1]}
 Level name : ${code[3]}
 Level style : ${code[2]}`)
 
-      });
-    }
+        } else {
+
+        console.log('fail');
+        msg.channel.send('failed sudmitted level code')
+
+        }
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*------------------------------------------------------------------------------------*/
     if (msg.content === '!list') {
       fs.readdir('./info', function(error, filelist){
