@@ -8,14 +8,6 @@ fs.mkdir('./info',{}, function () {
   console.log(`Starting bot...`);
 })
 
-/*fs.readdir('./info', 'utf8', function(error, filelist){
-console.log(filelist + 'isLev');
-})*/
-fs.writeFile(`./info/code`, 'code', 'utf8', function (e) {
-  console.log('aaa');
-})
-
-
 
 client.on('ready', () => {
   console.log(`Discord bot is ready!`);
@@ -35,9 +27,8 @@ client.on('message', msg => {
 
   if (msg.author.username !== myname[0]) {
 
-//----------------------------------------------------------//
-
-  if (msg.content.startsWith('!add')) {
+/*------------------------------------------------------------------------------------*/
+    if (msg.content.startsWith('!add')) {
     var code = msg.content.split(' ') //coed =array
     var sentence = code[2]
     var i = 2
@@ -61,25 +52,11 @@ Level style : ${code[2]}`)
 
         console.log('fail');
         msg.channel.send('failed sudmitted level code')
+        msg.channel.send(`\nError is \n${err}`)
 
         }
     });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  }
 /*------------------------------------------------------------------------------------*/
     if (msg.content === '!list') {
       fs.readdir('./info', function(error, filelist){
@@ -144,7 +121,7 @@ Level style : ${code[2]}`)
     }
 /*------------------------------------------------------------------------------------*/
 //LISTENING, WATCHING, PLAYING
-  if(msg.content.startsWith('!watch ')) {
+    if(msg.content.startsWith('!watch ')) {
     var code = msg.content.split(' ') //coed =array
     msg.channel.send('Game is update!')
     var game = ''
@@ -156,7 +133,7 @@ Level style : ${code[2]}`)
     client.user.setActivity(game, { type: 'WATCHING' })
     console.log(`Game has updata by ${msg.author.username}`);
   }
-  if(msg.content.startsWith('!listen ')) {
+    if(msg.content.startsWith('!listen ')) {
   var code = msg.content.split(' ') //coed =array
   msg.channel.send('Game is update!')
   var game = ''
@@ -168,7 +145,7 @@ Level style : ${code[2]}`)
   client.user.setActivity(game, { type: 'LISTENING' })
   console.log(`Game has updata by ${msg.author.username}`);
   }
-  if(msg.content.startsWith('!play ')) {
+    if(msg.content.startsWith('!play ')) {
   var code = msg.content.split(' ') //coed =array
   msg.channel.send('Game is update!')
   var game = ''
@@ -181,10 +158,11 @@ Level style : ${code[2]}`)
   console.log(`Game has updata by ${msg.author.username}`);
   }
 /*------------------------------------------------------------------------------------*/
-  if(command === '!code') {
+    if(command === '!code') {
       msg.channel.send(`Team battle bot\'s source code is
 https://github.com/kimsj5025/Team-battle-bot.git`)
     }
+/*------------------------------------------------------------------------------------*/
 
 
 
