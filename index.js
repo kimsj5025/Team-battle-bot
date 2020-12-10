@@ -4,9 +4,17 @@ var config = require('./Config.json'); //config.json 파일을 불러옴
 var fs = require('fs'); //fs 파일을 불러옴
 var game = 'Team battle bot'
 var i = 0
-fs.mkdir('./text',{}, function () {  
+fs.mkdir('./info',{}, function () {
   console.log(`Starting bot...`);
 })
+
+/*fs.readdir('./info', 'utf8', function(error, filelist){
+console.log(filelist + 'isLev');
+})*/
+fs.writeFile(`./info/code`, 'code', 'utf8', function (e) {
+  console.log('aaa');
+})
+
 
 
 client.on('ready', () => {
@@ -27,33 +35,43 @@ client.on('message', msg => {
 
   if (msg.author.username !== myname[0]) {
 
+//----------------------------------------------------------//
+
     if (msg.content.startsWith('!add')) {
       var code = msg.content.split(' ') //coed =array
-      var sentence = ''
-      var i = 2
+      var sentence = ''              //sentence = 123
+      var i = 2                         //i = 2
       while (i < code.length) {
 
         var sentence = sentence + '\n' + code[i]
         i++
       }
-      fs.writeFile(`./text/${code[1]}`, sentence, 'utf8', function(error){
+      console.log(sentence); //[<Level_style>]\n[<Level_title>]
+      console.log(code[1]); //[<Level_code>]
+      fs.writeFile(`./info/${code[1]}`, sentence, 'utf8', function (e) {
 
         console.log('writeFile is success!');
-        msg.channel.send(`${msg.author.username},\nYour level is submitted!`)
+        msg.channel.send(`${msg.author.username},\nYour level is submitted!
+
+Level code : ${code[1]}
+Level name : ${code[3]}
+Level style : ${code[2]}`)
 
       });
     }
 /*------------------------------------------------------------------------------------*/
     if (msg.content === '!list') {
-      fs.readdir('./text', function(error, filelist){
+      fs.readdir('./info', function(error, filelist){
         if (filelist === '') {
           msg.channel.send(`\nWe have no level`)
         }else {
+          var filelist = filelist + '\n'
+          var filelist = filelist.split('\n')
           var i = 0
           var dirs = `We're level list is\n`
           while (i < filelist.length) {
             //filelist는 맵 코드
-            var data = fs.readFileSync(`./text/${filelist[i]}`);
+            var data = fs.readFileSync(`./info/${filelist[i]}`);
             var dirs = dirs + '\n' +filelist[i]
             var data = data + '\n'
             var data = data.split('\n')
@@ -80,7 +98,7 @@ client.on('message', msg => {
       try {
 
         var code = msg.content.split(' ') //coed =array
-        fs.readFile(`./text/${code[1]}`, 'utf8', function(err, data) {
+        fs.readFile(`./info/${code[1]}`, 'utf8', function(err, data) {
 
           if (msg.content === '!info') {
 
@@ -161,4 +179,4 @@ https://github.com/kimsj5025/Team-battle-bot.git`)
 }); //client.on
 
 
-client.login(process.env.TOKEN);
+client.login('Nzc4NTg1MDQyMzg5NTY1NDYw.X7UH0w.azh-6GyPrqBz5fhiY2lqrGb0d2k');
