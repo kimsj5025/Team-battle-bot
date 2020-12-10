@@ -52,7 +52,7 @@ Level style : ${code[2]}`)
 
         console.log('fail');
         msg.channel.send('failed sudmitted level code')
-        msg.channel.send(`\nError is \n${err}`)
+        msg.channel.send(`\nError is \n${e}`)
 
         }
     });
@@ -89,26 +89,33 @@ Level style : ${code[2]}`)
 `)
     }
 /*------------------------------------------------------------------------------------*/
-    if (msg.content.startsWith('!info')) {
-      var code = msg.content.split(' ') //coed =array
-      fs.readFile(`./info/${code[1]}`, 'utf8', function(e, data) {
-        if (msg.content === '!info') {
+if (msg.content.startsWith('!info')) {
+  try {
 
-          msg.channel.send('No matching results')
+    var code = msg.content.split(' ') //coed =array
+    fs.readFile(`./info/${code[1]}`, 'utf8', function(e, data) {
+      if (msg.content === '!info') {
 
-        } else {
-          var data = data + '\n'
-          var data = data.split('\n')
-          var i = 0
-          var info = `${code[1]}'s info is...\n`
-          while (i < data.length) {
-              var info = `${info}\n${data[i]}`
-              i++
+        msg.channel.send('No matching results')
+
+      } else {
+        var data = data + '\n'
+        var data = data.split('\n')
+        var i = 0
+        var info = `${code[1]}'s info is...`
+        while (i < data.length) {
+            var info = `${info}\n${data[i]}`
+            i++
           }
+        msg.channel.send(info)
 
         }
-      })
-    }
+    })
+
+  } catch (e) {
+    console.error(e);
+  }
+}
 /*------------------------------------------------------------------------------------*/
 //LISTENING, WATCHING, PLAYING
     if(msg.content.startsWith('!watch ')) {
@@ -148,7 +155,7 @@ Level style : ${code[2]}`)
       console.log(`Game has updata by ${msg.author.username}`);
     }
 /*------------------------------------------------------------------------------------*/
-    if(command === '!Delete') {
+    if(command === '!delete') {
       console.log('woking');/*
       var data = command.split(' ')
       console.log(data);
@@ -166,13 +173,6 @@ Level style : ${code[2]}`)
 https://github.com/kimsj5025/Team-battle-bot.git`)
     }
 /*------------------------------------------------------------------------------------*/
-    if (command === '!debug') {
-      if (e !== '') {
-        msg.channel.send(`last error is \n\n${e}`)
-      }else {
-        msg.channel.send(`last error is not fund`)
-      }
-    }
 
 
 
