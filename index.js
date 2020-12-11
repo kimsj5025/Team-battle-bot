@@ -6,8 +6,12 @@ var game = 'Team battle bot'
 var i = 0
 var e = ''
 fs.mkdir('./info',{}, function () {
-  console.log(`Starting bot...`);
+  console.log(`mkdir './info'`);
 })
+fs.mkdir('./vid',{}, function () {
+    console.log(`mkdir './vid'`);
+})
+console.log(`Starting bot...`);
 
 
 client.on('ready', () => {
@@ -28,7 +32,7 @@ client.on('message', msg => {
 
   if (msg.author.username !== myname[0]) {
 /*------------------------------------------------------------------------------------*/
-    if (msg.content.startsWith('!add')) {
+    if (msg.content.startsWith('!add ')) {
     var code = msg.content.split(' ') //coed =array
     var sentence = ''
     var i = 2
@@ -42,7 +46,7 @@ client.on('message', msg => {
        if (e === null) {
 
        console.log('writeFile is success!');
-       msg.channel.send(`${msg.author.username},\nYour level is submitted!
+       msg.channel.send(`<@${msg.author.id}>,\nYour level is submitted!
 
 Level code : ${code[1]}
 Level name : ${code[3]}
@@ -51,7 +55,7 @@ Level style : ${code[2]}`)
         } else {
 
         console.log('fail');
-        msg.channel.send('failed sudmitted level code')
+        msg.channel.send(`<@${msg.author.id}>,\nfailed sudmitted level code`)
         msg.channel.send(`\nError is \n${e}`)
 
         }
@@ -70,10 +74,10 @@ Level style : ${code[2]}`)
             var data = fs.readFileSync(`./info/${filelist[i]}`, 'utf8');
             var data = data.split('\n')
             var dirs = dirs + '\n' +filelist[i]
-            var dirs = `\n${dirs} - \`${data[2]}\``
+            var dirs = `${dirs} - \`${data[2]}\``
             i++
           }
-          msg.channel.send(dirs)
+          msg.channel.send(`<@${msg.author.id}>,${dirs}`)
         }
       })
     }
@@ -89,33 +93,45 @@ Level style : ${code[2]}`)
 `)
     }
 /*------------------------------------------------------------------------------------*/
-if (msg.content.startsWith('!info')) {
-  try {
+    if (msg.content.startsWith('!info')) {
+      try {
 
-    var code = msg.content.split(' ') //coed =array
-    fs.readFile(`./info/${code[1]}`, 'utf8', function(e, data) {
-      if (msg.content === '!info') {
+        var code = msg.content.split(' ') //coed =array
+        fs.readFile(`./info/${code[1]}`, 'utf8', function(e, data) {
+          var vid = fs.readFileSync(`./vid/${code[1]}`, 'utf8').split('\n')
 
-        msg.channel.send('No matching results')
+          if (msg.content === '!info') {
 
-      } else {
-        var data = data + '\n'
-        var data = data.split('\n')
-        var i = 0
-        var info = `${code[1]}'s info is...`
-        while (i < data.length) {
-            var info = `${info}\n${data[i]}`
-            i++
+            msg.channel.send('No matching results')
+
+          } else {
+            var data = data + '\n'
+            var data = data.split('\n')
+            var i = 0
+            var info = `${code[1]}'s info is...`
+            while (i < data.length) {
+              var info = `${info}\n${data[i]}`
+              i++
+            }
+            var i = 1
+            var info = info + 'level\'s vid is...'
+            while (i < vid.length) {
+              var info = `${info}\n${vid[i]}`
+              i++
+            }
+            if (e !== null) {
+              msg.channel.send(`${e}`)
+            }else {
+              msg.channel.send(`<@${msg.author.id}>,\n${info}`)
+            }
+
           }
-        msg.channel.send(info)
+        })
 
-        }
-    })
-
-  } catch (e) {
-    console.error(e);
-  }
-}
+      } catch (e) {
+        console.error(e);
+      }
+    }
 /*------------------------------------------------------------------------------------*/
 //LISTENING, WATCHING, PLAYING
     if(msg.content.startsWith('!watch ')) {
@@ -155,17 +171,15 @@ if (msg.content.startsWith('!info')) {
       console.log(`Game has updata by ${msg.author.username}`);
     }
 /*------------------------------------------------------------------------------------*/
-    if(command === '!delete') {
-      console.log('woking');/*
+    if(command.startsWith('!removelevel ')) {
       var data = command.split(' ')
-      console.log(data);
       fs.unlink(`./info/${data[1]}`, function (e) {
         if (e == null) {
-          msg.channel.send(`Delete level ${data[1]}`)
+          msg.channel.send(`<@${msg.author.id}>,\nDelete level ${data[1]}`)
         }else {
           msg.channel.send(`error! \n${e}`)
         }
-      });*/
+      });
     }
 /*------------------------------------------------------------------------------------*/
     if(command === '!code') {
@@ -173,7 +187,36 @@ if (msg.content.startsWith('!info')) {
 https://github.com/kimsj5025/Team-battle-bot.git`)
     }
 /*------------------------------------------------------------------------------------*/
+    if(command === '!msg') {
+      console.log(msg);
+      msg.channel.send(`<@${msg.author.id}>,\nconsole.log(msg)!`)
+    }
+/*------------------------------------------------------------------------------------*/
+    if (msg.content.startsWith('!addvid ')) {
+var code = msg.content.split(' ') //coed =array
+var sentence = ''
+var i = 2
+while (i < code.length) {
 
+  var sentence = sentence + '\n' + code[i]
+  i++
+}
+var sentence = sentence + '\n'
+fs.writeFile(`vid/${code[1]}`,sentence,function(e){
+   if (e === null) {
+
+   console.log('writeFile is success!');
+   msg.channel.send(`<@${msg.author.id}>,\nYour vid is submitted!`)
+
+    } else {
+
+    console.log('fail');
+    msg.channel.send(`<@${msg.author.id}>,\nfailed sudmitted vids`)
+    msg.channel.send(`\nError is \n${e}`)
+
+    }
+});
+}
 
 
 
