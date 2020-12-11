@@ -230,4 +230,4 @@ fs.writeFile(`vid/${code[1]}`,sentence,function(e){
 }); //client.on
 
 
-client.login('Nzc4NTg1MDQyMzg5NTY1NDYw.X7UH0w.olFGPvUTPsujCle82Aif3UGJNcU');
+client.login(process.env.TOKEN);
