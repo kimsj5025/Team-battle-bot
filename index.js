@@ -77,7 +77,11 @@ Level style : ${code[2]}`)
             var dirs = `${dirs} - \`${data[2]}\``
             i++
           }
-          msg.channel.send(`<@${msg.author.id}>,${dirs}`)
+          if (e === null) {
+            msg.channel.send(`<@${msg.author.id}>,${dirs}`)
+          }else {
+            msg.channel.send(`error!\n${e}`)
+          }
         }
       })
     }
@@ -193,30 +197,30 @@ https://github.com/kimsj5025/Team-battle-bot.git`)
     }
 /*------------------------------------------------------------------------------------*/
     if (msg.content.startsWith('!addvid ')) {
-var code = msg.content.split(' ') //coed =array
-var sentence = ''
-var i = 2
-while (i < code.length) {
+      var code = msg.content.split(' ') //coed =array
+      var sentence = ''
+      var i = 2
+      while (i < code.length) {
 
-  var sentence = sentence + '\n' + code[i]
-  i++
-}
-var sentence = sentence + '\n'
-fs.writeFile(`vid/${code[1]}`,sentence,function(e){
-   if (e === null) {
+        var sentence = sentence + '\n' + code[i]
+        i++
+      }
+      var sentence = sentence + '\n'
+      fs.writeFile(`vid/${code[1]}`,sentence,function(e){
+        if (e === null) {
 
-   console.log('writeFile is success!');
-   msg.channel.send(`<@${msg.author.id}>,\nYour vid is submitted!`)
+          console.log('writeFile is success!');
+          msg.channel.send(`<@${msg.author.id}>,\nYour vid is submitted!`)
 
-    } else {
+        } else {
 
-    console.log('fail');
-    msg.channel.send(`<@${msg.author.id}>,\nfailed sudmitted vids`)
-    msg.channel.send(`\nError is \n${e}`)
+          console.log('fail');
+          msg.channel.send(`<@${msg.author.id}>,\nfailed sudmitted vids`)
+          msg.channel.send(`\nError is \n${e}`)
 
+        }
+      });
     }
-});
-}
 
 
 
