@@ -34,13 +34,6 @@ client.on('message', msg => {
   if (msg.author.username !== myname[0]) {
 
 
-
-
-
-
-
-
-
     if (msg.content.startsWith('!add ')) {
     var code = msg.content.split(' ') //coed =array
     var sentence = ''
@@ -236,32 +229,6 @@ https://github.com/kimsj5025/Team-battle-bot.git`)
       });
     }
 /*------------------------------------------------------------------------------------*/
-    /*if (command === '!mylist') {
-      var dirs = []
-      fs.readdir(`./info`, 'utf8', function(e, data) {
-        var i = 0
-        while (i < data.length) {
-          fs.readFile(`./info/${data[i]}`, 'utf8', function (e, d) {
-            if (e === null) {
-              var d = d.split('\n')
-              if (d[5] === msg.author.username) {
-                dirs.push(data[i])
-              }
-            } else {
-              msg.channel.send(`error!\n${e}`)
-            }
-          })
-          i++
-        }
-        var i = 0
-        var sentence = ''
-        while (i < dirs.length) {
-          var sentence = sentence + dir[i]
-          i++
-        }
-        msg.channel.send(`${sentence}`)
-      })
-    }*/ //나중에
     if (command === '!random') {
 
       fs.readdir(`./info`, 'utf8', function(e, data) {
@@ -269,23 +236,22 @@ https://github.com/kimsj5025/Team-battle-bot.git`)
         var random = Math.random()
         var random_ = Math.floor(random * data.length)
         fs.readFile(`./info/${data[random_]}`, 'utf8', function(e, d) {
-          var sentence = `${data[random_]}${d}`
-          msg.channel.send(`<@${msg.author.id}>,\n${sentence}`)
+          var d = d.split('\n')
+          var sentence = `
+level\'s code is \`${data[random_]}\`
+Made by \`${d[3]}\`
+Level style is \`${d[1]}\`
+level title is \`${d[2]}\`
+`
+          msg.channel.send(`<@${msg.author.id}>,${sentence}`)
         })
-      })//어쩐지 이상하더라
+      })
 
     }
 
 
 
-/*
-@사용자,
-Team Battle Boat found a level just for you:
-맵제목 (맵코드)
-맵제목 (맵코드)
-made by 맵제작자이름
-Tags: 태그1, 태그2, 태그3, 태그4
-*/
+
 
 
 
