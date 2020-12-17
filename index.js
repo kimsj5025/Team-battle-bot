@@ -31,7 +31,15 @@ client.on('message', msg => {
 
 
   if (msg.author.username !== myname[0]) {
-/*------------------------------------------------------------------------------------*/
+
+
+
+
+
+
+
+
+
     if (msg.content.startsWith('!add ')) {
     var code = msg.content.split(' ') //coed =array
     var sentence = ''
@@ -41,7 +49,7 @@ client.on('message', msg => {
       var sentence = sentence + '\n' + code[i]
       i++
     }
-    var sentence = sentence + '\n'
+    var sentence = `${sentence}\n${msg.author.username}`
     fs.writeFile(`info/${code[1]}`,sentence,function(e){
        if (e === null) {
 
@@ -51,6 +59,7 @@ client.on('message', msg => {
 Level code : ${code[1]}
 Level name : ${code[3]}
 Level style : ${code[2]}`)
+      fs.writeFile(`vid/${code[1]}`,'',function(e){})
 
         } else {
 
@@ -103,6 +112,7 @@ Level style : ${code[2]}`)
         var code = msg.content.split(' ') //coed =array
         fs.readFile(`./info/${code[1]}`, 'utf8', function(e, data) {
           var vid = fs.readFileSync(`./vid/${code[1]}`, 'utf8').split('\n')
+          console.log(vid);
 
           if (msg.content === '!info') {
 
@@ -118,10 +128,12 @@ Level style : ${code[2]}`)
               i++
             }
             var i = 1
-            var info = info + 'level\'s vid is...'
-            while (i < vid.length) {
-              var info = `${info}\n${vid[i]}`
-              i++
+            if (vid[1] !== '') {
+              var info = info + 'level\'s vid is...'
+              while (i < vid.length) {
+                var info = `${info}\n${vid[i]}`
+                i++
+              }
             }
             if (e !== null) {
               msg.channel.send(`${e}`)
@@ -221,7 +233,57 @@ https://github.com/kimsj5025/Team-battle-bot.git`)
         }
       });
     }
+/*------------------------------------------------------------------------------------*/
+    /*if (command === '!mylist') {
+      var dirs = []
+      fs.readdir(`./info`, 'utf8', function(e, data) {
+        var i = 0
+        while (i < data.length) {
+          fs.readFile(`./info/${data[i]}`, 'utf8', function (e, d) {
+            if (e === null) {
+              var d = d.split('\n')
+              if (d[5] === msg.author.username) {
+                dirs.push(data[i])
+              }
+            } else {
+              msg.channel.send(`error!\n${e}`)
+            }
+          })
+          i++
+        }
+        var i = 0
+        var sentence = ''
+        while (i < dirs.length) {
+          var sentence = sentence + dir[i]
+          i++
+        }
+        msg.channel.send(`${sentence}`)
+      })
+    }*/ //나중에
+    if (command === '!random') {
 
+      fs.readdir(`./info`, 'utf8', function(e, data) {
+
+        var random = Math.random()
+        var random_ = Math.floor(random * data.length)
+        fs.readFile(`./info/${data[random_]}`, 'utf8', function(e, d) {
+          var sentence = `${data[random_]}${d}`
+          msg.channel.send(`<@${msg.author.id}>,\n${sentence}`)
+        })
+      })//어쩐지 이상하더라
+
+    }
+
+
+
+/*
+@사용자,
+Team Battle Boat found a level just for you:
+맵제목 (맵코드)
+맵제목 (맵코드)
+made by 맵제작자이름
+Tags: 태그1, 태그2, 태그3, 태그4
+*/
 
 
 
@@ -234,4 +296,4 @@ https://github.com/kimsj5025/Team-battle-bot.git`)
 }); //client.on
 
 
-client.login(process.env.TOKEN);
+client.login('Nzc4NTg1MDQyMzg5NTY1NDYw.X7UH0w.Gj4bZvZVQeFEKFalWvtbaIpnli8');
