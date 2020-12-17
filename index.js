@@ -106,8 +106,6 @@ Level style : ${code[2]}`)
         var code = msg.content.split(' ') //coed =array
         fs.readFile(`./info/${code[1]}`, 'utf8', function(e, data) {
           var vid = fs.readFileSync(`./vid/${code[1]}`, 'utf8').split('\n')
-          console.log(vid);
-
           if (msg.content === '!info') {
 
             msg.channel.send('No matching results')
