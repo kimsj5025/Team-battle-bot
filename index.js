@@ -21,6 +21,7 @@ client.on('ready', () => {
 });
 
 
+
 client.on('message', msg => {
 
   var command = msg.content
@@ -121,12 +122,13 @@ Level style : ${code[2]}`)
           } else {
             var data = data + '\n'
             var data = data.split('\n')
-            var i = 0
-            var info = `${code[1]}'s info is...`
-            while (i < data.length) {
-              var info = `${info}\n${data[i]}`
-              i++
-            }
+
+            var info = `${code[1]}\'s info is...
+
+Made by \`${data[3]}\`
+Level style is \`${data[1]}\`
+level title is \`${data[2]}\`
+`
             var i = 1
             if (vid[1] !== '') {
               var info = info + 'level\'s vid is...'
