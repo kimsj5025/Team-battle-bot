@@ -290,4 +290,4 @@ level title is \`${d[2]}\`
 }); //client.on
 
 
-client.login('Nzc4NTg1MDQyMzg5NTY1NDYw.X7UH0w.qWmhQxDKeyECDGEcwZxZwgCuiFI');
+client.login(process.env.TOKEN);
