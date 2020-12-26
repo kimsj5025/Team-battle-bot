@@ -249,7 +249,7 @@ level title is \`${d[2]}\`
 
     }
 /*------------------------------------------------------------------------------------*/
-    if(message.content.startsWith(config.prefix + 'ping')) {
+    if(message.content.startsWith('!ping')) {
       message.channel.send(`${client.ping}ms`)
     }
 
