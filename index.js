@@ -249,31 +249,6 @@ level title is \`${d[2]}\`
 
     }
 /*------------------------------------------------------------------------------------*/
-    if (command === '!mylist') {
-          var dirs = []
-          fs.readdir(`./info`, 'utf8', function(e, data) {
-            var i = 0
-            while (i < data.length) {
-              var d = fs.readFileSync(`./info/${data[i]}`, 'utf8')
-              var d = d.split('\n')
-              if (d[3] === msg.author.username) {
-                dirs.push(d[2])
-              }
-            i++
-            }
-            var i = 0
-            var sentence = ''
-            while (i < dirs.length) {
-              var sentence = `${sentence}\n${dirs[i]}`
-              i++
-            }
-            if (sentence === null) {
-              msg.channel.send(`you have no level`)
-            }else {
-              msg.channel.send(`${sentence}`)
-            }
-          })
-        }
 
 
 
