@@ -22,6 +22,9 @@ client.on('ready', () => {
 
 
 
+
+
+
 client.on('message', msg => {
 
   var command = msg.content
