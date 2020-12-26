@@ -1,6 +1,5 @@
 var Discord = require('discord.js'); // discord.js를 불러옴
 var client = new Discord.Client(); // 새로운 디스코드 클라이언트를 만듬
-var config = require('./Config.json'); //config.json 파일을 불러옴
 var fs = require('fs'); //fs 파일을 불러옴
 var game = 'Team battle bot'
 var i = 0
@@ -26,7 +25,6 @@ client.on('ready', () => {
 
 
 client.on('message', msg => {
-
   var command = msg.content
 
   var myname = client.user.tag.split('#')
@@ -41,11 +39,12 @@ client.on('message', msg => {
     var code = msg.content.split(' ') //coed =array
     var sentence = ''
     var i = 2
-    while (i < code.length) {
-
-      var sentence = sentence + '\n' + code[i]
-      i++
-    }
+                             //!add code style title
+                             // 0     1    2     3
+    var sentence = `
+${code[2]}
+${code[3]}
+${msg.author.username}`
     var sentence = `${sentence}\n${msg.author.username}`
     fs.writeFile(`info/${code[1]}`,sentence,function(e){
        if (e === null) {
@@ -249,6 +248,32 @@ level title is \`${d[2]}\`
       })
 
     }
+/*------------------------------------------------------------------------------------*/
+    if (command === '!mylist') {
+          var dirs = []
+          fs.readdir(`./info`, 'utf8', function(e, data) {
+            var i = 0
+            while (i < data.length) {
+              var d = fs.readFileSync(`./info/${data[i]}`, 'utf8')
+              var d = d.split('\n')
+              if (d[3] === msg.author.username) {
+                dirs.push(d[2])
+              }
+            i++
+            }
+            var i = 0
+            var sentence = ''
+            while (i < dirs.length) {
+              var sentence = `${sentence}\n${dirs[i]}`
+              i++
+            }
+            if (sentence === null) {
+              msg.channel.send(`you have no level`)
+            }else {
+              msg.channel.send(`${sentence}`)
+            }
+          })
+        }
 
 
 
@@ -265,4 +290,4 @@ level title is \`${d[2]}\`
 }); //client.on
 
 
-client.login(process.env.TOKEN);
+client.login('Nzc4NTg1MDQyMzg5NTY1NDYw.X7UH0w.qWmhQxDKeyECDGEcwZxZwgCuiFI');
