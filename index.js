@@ -190,73 +190,66 @@ level title is \`${data[2]}\`
       });
     }
 /*------------------------------------------------------------------------------------*/
-    if (command === '!random') {
+    switch (msg.content) {
+      case '!random':
+        fs.readdir(`./info`, 'utf8', function(e, data) {
 
-      fs.readdir(`./info`, 'utf8', function(e, data) {
-
-        var random = Math.random()
-        var random_ = Math.floor(random * data.length)
-        fs.readFile(`./info/${data[random_]}`, 'utf8', function(e, d) {
-          var d = d.split('\n')
-          var sentence = `
+              var random = Math.random()
+              var random_ = Math.floor(random * data.length)
+              fs.readFile(`./info/${data[random_]}`, 'utf8', function(e, d) {
+                var d = d.split('\n')
+                var sentence = `
 level\'s code is \`${data[random_]}\`
 Made by \`${d[3]}\`
 Level style is \`${d[1]}\`
 level title is \`${d[2]}\`
-`
-          msg.channel.send(`<@${msg.author.id}>,${sentence}`)
-        })
+      `
+                msg.channel.send(`<@${msg.author.id}>,${sentence}`)
+              })
+            })
+        break;
+      case '!code':
+      msg.channel.send(`Team battle bot\'s source code is
+https://github.com/kimsj5025/Team-battle-bot.git`)
+        break;
+      case '!msg':
+        console.log(msg)
+        break;
+      case '!list':
+        fs.readdir('./info', function(e, filelist){
+        if (filelist === '') {
+          msg.channel.send(`\nWe have no level`)
+        }else {
+          var i = 0
+          var dirs = `We're level list is\n`
+          while (i < filelist.length) {
+            //filelist는 맵 코드
+            var data = fs.readFileSync(`./info/${filelist[i]}`, 'utf8');
+            var data = data.split('\n')
+            var dirs = dirs + '\n' +filelist[i]
+            var dirs = `${dirs} - \`${data[2]}\``
+            i++
+          }
+          if (e === null) {
+            msg.channel.send(`<@${msg.author.id}>,${dirs}`)
+          }else {
+            msg.channel.send(`error!\n${e}`)
+          }
+        }
       })
+        break;
+      case '!help':
+      msg.channel.send(`!add - submit level
 
-    }
-/*------------------------------------------------------------------------------------*/
-    if(command === '!code') {
-  msg.channel.send(`Team battle bot\'s source code is
-  https://github.com/kimsj5025/Team-battle-bot.git`)
-}
-/*------------------------------------------------------------------------------------*/
-    if(command === '!msg') {
-  console.log(msg);
-  msg.channel.send(`<@${msg.author.id}>,\nconsole.log(msg)!`)
-}
-/*------------------------------------------------------------------------------------*/
-    if (msg.content === '!list') {
-  fs.readdir('./info', function(e, filelist){
-    if (filelist === '') {
-      msg.channel.send(`\nWe have no level`)
-    }else {
-      var i = 0
-      var dirs = `We're level list is\n`
-      while (i < filelist.length) {
-        //filelist는 맵 코드
-        var data = fs.readFileSync(`./info/${filelist[i]}`, 'utf8');
-        var data = data.split('\n')
-        var dirs = dirs + '\n' +filelist[i]
-        var dirs = `${dirs} - \`${data[2]}\``
-        i++
-      }
-      if (e === null) {
-        msg.channel.send(`<@${msg.author.id}>,${dirs}`)
-      }else {
-        msg.channel.send(`error!\n${e}`)
-      }
-    }
-  })
-}
-/*------------------------------------------------------------------------------------*/
-    if (msg.content==='!help') {
-  msg.channel.send(`!add - submit level
+!list - Show your level
 
-    !list - Show your level
+!info - Show level's info
 
-    !info - Show level's info
-
-    !code - Show bot's source code
-    `)
-  }
-/*------------------------------------------------------------------------------------*/
-    if(command === '!ping') {
-    msg.channel.send('Pong! `' + Math.floor(client.uptime) + ' ms`')
+!code - Show bot's source code`)
+        break;
+      case '!ping':
+        msg.channel.send('Pong! `' + Math.floor(client.uptime) + ' ms`')
+        break;
     }
 
 
@@ -274,4 +267,4 @@ level title is \`${d[2]}\`
 }); //client.on
 
 
-client.login('Nzc4NTg1MDQyMzg5NTY1NDYw.X7UH0w.pgh7iurDzwUCLBp4FdFmn1VY_V0');
+client.login(process.env.TOKEN);
