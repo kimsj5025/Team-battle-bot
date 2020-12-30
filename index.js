@@ -1,7 +1,6 @@
 var Discord = require('discord.js'); // discord.js를 불러옴
 var client = new Discord.Client(); // 새로운 디스코드 클라이언트를 만듬
 var fs = require('fs'); //fs 파일을 불러옴
-var game = 'Team battle bot'
 var i = 0
 var e = ''
 fs.mkdir('./info',{}, function () {
@@ -16,6 +15,7 @@ console.log(`Starting bot...`);
 client.on('ready', () => {
   console.log(`Discord bot is ready!`);
   console.log(`Login by ${client.user.tag}`);
+  var game = Math.floor(client.uptime) + 'ms'
   client.user.setActivity(game, { type: 'PLAYING' })
 });
 
@@ -25,6 +25,11 @@ client.on('ready', () => {
 
 
 client.on('message', msg => {
+
+  var game = 'ping : ' + Math.floor(client.uptime) + 'ms'
+  client.user.setActivity(game, { type: 'PLAYING' })
+
+
   var command = msg.content
 
   var myname = client.user.tag.split('#')
@@ -33,8 +38,9 @@ client.on('message', msg => {
 
 
   if (msg.author.username !== myname[0]) {
-
-
+/*------------------------------------------------------------------------------------*/
+    if(msg.channel.type == 'dm') return;
+/*------------------------------------------------------------------------------------*/
     if (msg.content.startsWith('!add ')) {
     var code = msg.content.split(' ') //coed =array
     var sentence = ''
@@ -66,41 +72,6 @@ Level style : ${code[2]}`)
         }
     });
   }
-/*------------------------------------------------------------------------------------*/
-    if (msg.content === '!list') {
-      fs.readdir('./info', function(e, filelist){
-        if (filelist === '') {
-          msg.channel.send(`\nWe have no level`)
-        }else {
-          var i = 0
-          var dirs = `We're level list is\n`
-          while (i < filelist.length) {
-            //filelist는 맵 코드
-            var data = fs.readFileSync(`./info/${filelist[i]}`, 'utf8');
-            var data = data.split('\n')
-            var dirs = dirs + '\n' +filelist[i]
-            var dirs = `${dirs} - \`${data[2]}\``
-            i++
-          }
-          if (e === null) {
-            msg.channel.send(`<@${msg.author.id}>,${dirs}`)
-          }else {
-            msg.channel.send(`error!\n${e}`)
-          }
-        }
-      })
-    }
-/*------------------------------------------------------------------------------------*/
-    if (msg.content==='!help') {
-      msg.channel.send(`!add - submit level
-
-!list - Show your level
-
-!info - Show level's info
-
-!code - Show bot's source code
-`)
-    }
 /*------------------------------------------------------------------------------------*/
     if (msg.content.startsWith('!info')) {
       try {
@@ -193,16 +164,6 @@ level title is \`${data[2]}\`
       });
     }
 /*------------------------------------------------------------------------------------*/
-    if(command === '!code') {
-      msg.channel.send(`Team battle bot\'s source code is
-https://github.com/kimsj5025/Team-battle-bot.git`)
-    }
-/*------------------------------------------------------------------------------------*/
-    if(command === '!msg') {
-      console.log(msg);
-      msg.channel.send(`<@${msg.author.id}>,\nconsole.log(msg)!`)
-    }
-/*------------------------------------------------------------------------------------*/
     if (msg.content.startsWith('!addvid ')) {
       var code = msg.content.split(' ') //coed =array
       var sentence = ''
@@ -249,8 +210,53 @@ level title is \`${d[2]}\`
 
     }
 /*------------------------------------------------------------------------------------*/
-    if(message.content.startsWith('!ping')) {
-      message.channel.send(`${client.ping}ms`)
+    if(command === '!code') {
+  msg.channel.send(`Team battle bot\'s source code is
+  https://github.com/kimsj5025/Team-battle-bot.git`)
+}
+/*------------------------------------------------------------------------------------*/
+    if(command === '!msg') {
+  console.log(msg);
+  msg.channel.send(`<@${msg.author.id}>,\nconsole.log(msg)!`)
+}
+/*------------------------------------------------------------------------------------*/
+    if (msg.content === '!list') {
+  fs.readdir('./info', function(e, filelist){
+    if (filelist === '') {
+      msg.channel.send(`\nWe have no level`)
+    }else {
+      var i = 0
+      var dirs = `We're level list is\n`
+      while (i < filelist.length) {
+        //filelist는 맵 코드
+        var data = fs.readFileSync(`./info/${filelist[i]}`, 'utf8');
+        var data = data.split('\n')
+        var dirs = dirs + '\n' +filelist[i]
+        var dirs = `${dirs} - \`${data[2]}\``
+        i++
+      }
+      if (e === null) {
+        msg.channel.send(`<@${msg.author.id}>,${dirs}`)
+      }else {
+        msg.channel.send(`error!\n${e}`)
+      }
+    }
+  })
+}
+/*------------------------------------------------------------------------------------*/
+    if (msg.content==='!help') {
+  msg.channel.send(`!add - submit level
+
+    !list - Show your level
+
+    !info - Show level's info
+
+    !code - Show bot's source code
+    `)
+  }
+/*------------------------------------------------------------------------------------*/
+    if(command === '!ping') {
+    msg.channel.send('Pong! `' + Math.floor(client.uptime) + ' ms`')
     }
 
 
@@ -268,4 +274,4 @@ level title is \`${d[2]}\`
 }); //client.on
 
 
-client.login(process.env.TOKEN);
+client.login('Nzc4NTg1MDQyMzg5NTY1NDYw.X7UH0w.pgh7iurDzwUCLBp4FdFmn1VY_V0');
