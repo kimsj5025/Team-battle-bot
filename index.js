@@ -191,6 +191,36 @@ level title is \`${data[2]}\`
       });
     }
 
+
+    if (command.startsWith('!removevid ')) {
+      var data = command.split(' ')
+      fs.unlink(`./vid/${data[1]}`, function (e) {
+        if (e == null) {
+          msg.channel.send(`<@${msg.author.id}>,\nDelete level ${data[1]}`)
+        }else {
+          msg.channel.send(`error! \n${e}`)
+        }
+      });
+    }
+    
+
+
+    if (command.startsWith('!reupload ')) {
+      var code = command.split(' ')
+      fs.renameSync(`./info/${code[1]}`, `./info/${code[2]}` )
+      fs.renameSync(`./vid/${code[1]}`, `./vid/${code[2]}` )
+      msg.channel.send({embed: {
+        color: 3447003,
+        title: "reupload!",
+        description: `${code[1]} => ${code[2]}`,
+        timestamp: new Date(),
+        footer: {
+          icon_url: client.user.avatarURL(),
+          text: "© Team battle bot"
+        }
+      }});
+    }
+
     switch (msg.content) {
 
       
