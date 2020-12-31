@@ -33,7 +33,6 @@ client.on('message', msg => {
   var game = 'ping : ' + Math.floor(client.uptime) + 'ms'
   client.user.setActivity(game, { type: 'PLAYING' })
 
-
   var command = msg.content
 
   var myname = client.user.tag.split('#')
@@ -42,9 +41,7 @@ client.on('message', msg => {
 
 
   if (msg.author.username !== myname[0]) {
-/*------------------------------------------------------------------------------------*/
     if(msg.channel.type == 'dm') return;
-/*------------------------------------------------------------------------------------*/
     if (msg.content.startsWith('!add ')) {
     var code = msg.content.split(' ') //coed =array
     var sentence = ''
@@ -55,7 +52,6 @@ client.on('message', msg => {
 ${code[2]}
 ${code[3]}
 ${msg.author.username}`
-    var sentence = `${sentence}\n${msg.author.username}`
     fs.writeFile(`info/${code[1]}`,sentence,function(e){
        if (e === null) {
 
@@ -76,7 +72,6 @@ Level style : ${code[2]}`)
         }
     });
   }
-/*------------------------------------------------------------------------------------*/
     if (msg.content.startsWith('!info')) {
       try {
 
@@ -118,8 +113,7 @@ level title is \`${data[2]}\`
         console.error(e);
       }
     }
-/*------------------------------------------------------------------------------------*/
-//LISTENING, WATCHING, PLAYING
+    //LISTENING, WATCHING, PLAYING
     if(msg.content.startsWith('!watch ')) {
     var code = msg.content.split(' ') //coed =array
     msg.channel.send('Game is update!')
@@ -156,7 +150,6 @@ level title is \`${data[2]}\`
       client.user.setActivity(game, { type: 'PLAYING' })
       console.log(`Game has updata by ${msg.author.username}`);
     }
-/*------------------------------------------------------------------------------------*/
     if(command.startsWith('!removelevel ')) {
       var data = command.split(' ')
       fs.unlink(`./info/${data[1]}`, function (e) {
@@ -167,7 +160,7 @@ level title is \`${data[2]}\`
         }
       });
     }
-/*------------------------------------------------------------------------------------*/
+
     if (msg.content.startsWith('!addvid ')) {
       var code = msg.content.split(' ') //coed =array
       var sentence = ''
@@ -193,8 +186,11 @@ level title is \`${data[2]}\`
         }
       });
     }
-/*------------------------------------------------------------------------------------*/
+
     switch (msg.content) {
+
+      
+
       case '!random':
         fs.readdir(`./info`, 'utf8', function(e, data) {
 
@@ -262,9 +258,15 @@ https://github.com/kimsj5025/Team-battle-bot.git`)
 
 !code - Show bot's source code`)
         break;
+
+
+
       case '!ping':
         msg.channel.send('Pong! `' + Math.floor(client.uptime) + ' ms`')
         break;
+
+
+
       case '!embed':
     msg.channel.send(embed('title', 'aaa-aaa-aaa','good_level', '3DW', 'https://naver.com', 'https://naver.com'))
         break;
