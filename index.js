@@ -13,6 +13,7 @@ fs.mkdir('./info',{}, function () {
 fs.mkdir('./vid',{}, function () {
     console.log(`mkdir './vid'`);
 })
+
 console.log(`Starting bot...`);
 
 
@@ -38,10 +39,13 @@ client.on('message', msg => {
   var myname = client.user.tag.split('#')
 
 
-
-
+  
   if (msg.author.username !== myname[0]) {
+
+
     if(msg.channel.type == 'dm') return;
+
+
     if (msg.content.startsWith('!add ')) {
     var code = msg.content.split(' ') //coed =array
     var sentence = ''
@@ -282,8 +286,7 @@ https://github.com/kimsj5025/Team-battle-bot.git`)
 
 
 
-
-  }; /*본인인지 채크*/
+  }; //name =/ myname
 }); //client.on
 
 
