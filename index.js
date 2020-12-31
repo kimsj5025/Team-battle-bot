@@ -13,6 +13,9 @@ fs.mkdir('./info',{}, function () {
 fs.mkdir('./vid',{}, function () {
     console.log(`mkdir './vid'`);
 })
+fs.mkdir('./tag', {}, function(){
+  console.log(`mkdir './tag'`);
+})
 
 console.log(`Starting bot...`);
 
@@ -65,7 +68,8 @@ ${msg.author.username}`
 Level code : ${code[1]}
 Level name : ${code[3]}
 Level style : ${code[2]}`)
-      fs.writeFile(`vid/${code[1]}`,'',function(e){})
+      fs.writeFileSync(`vid/${code[1]}`,'')
+      fs.writeFileSync(`tag/${code[1]}`,'')
 
         } else {
 
@@ -87,27 +91,17 @@ Level style : ${code[2]}`)
             msg.channel.send('No matching results')
 
           } else {
+
             var data = data + '\n'
             var data = data.split('\n')
+            var link = fs.readFileSync(`./vid/${code[1]}`, 'utf8')
+            var links = link.split('\n')
+            var tag = fs.readFileSync(`./tag/${code[1]}`, 'utf8')
 
-            var info = `${code[1]}\'s info is...
-
-Made by \`${data[3]}\`
-Level style is \`${data[1]}\`
-level title is \`${data[2]}\`
-`
-            var i = 1
-            if (vid[1] !== '') {
-              var info = info + 'level\'s vid is...'
-              while (i < vid.length) {
-                var info = `${info}\n${vid[i]}`
-                i++
-              }
-            }
             if (e !== null) {
               msg.channel.send(`${e}`)
             }else {
-              msg.channel.send(`<@${msg.author.id}>,\n${info}`)
+              msg.channel.send(embed(`made by ${data[3]}`, code[1], data[2], data[1], links[1], links[2], links[3], tag))
             }
 
           }
@@ -204,7 +198,6 @@ level title is \`${data[2]}\`
     }
     
 
-
     if (command.startsWith('!reupload ')) {
       var code = command.split(' ')
       fs.renameSync(`./info/${code[1]}`, `./info/${code[2]}` )
@@ -221,6 +214,46 @@ level title is \`${data[2]}\`
       }});
     }
 
+
+    if (msg.content.startsWith('!addtag ')) {
+      var code = msg.content.split(' ') //coed =array
+      var sentence = code[2]
+      var i = 3
+      while (i < code.length) {
+
+        var sentence = sentence + ', ' + code[i]
+        i++
+      }
+      var sentence = sentence + '\n'
+      fs.writeFile(`tag/${code[1]}`,sentence,function(e){
+        if (e === null) {
+
+          console.log('writeFile is success!');
+          msg.channel.send(`<@${msg.author.id}>,\nYour tag is submitted!`)
+
+        } else {
+
+          console.log('fail');
+          msg.channel.send(`<@${msg.author.id}>,\nfailed sudmitted tags`)
+          msg.channel.send(`\nError is \n${e}`)
+
+        }
+      });
+    }
+
+
+    if (command.startsWith('!removetag ')) {
+      var data = command.split(' ')
+      fs.writeFile(`./tag/${data[1]}`,'no tags' , function (e) {
+        if (e == null) {
+          msg.channel.send(`<@${msg.author.id}>,\nDelete tag ${data[1]}`)
+        }else {
+          msg.channel.send(`error! \n${e}`)
+        }
+      });
+    }
+
+
     switch (msg.content) {
 
       
@@ -234,7 +267,8 @@ level title is \`${data[2]}\`
                 var d = d.split('\n')
                 var link = fs.readFileSync(`./vid/${data[random_]}`, 'utf8')
                 var links = link.split('\n')
-                msg.channel.send(embed('Random level!', data[random_], d[2], d[1], links[0], links[1], links[2]))
+                var tag = fs.readFileSync(`./tag/${data[random_]}`, 'utf8')
+                msg.channel.send(embed('Random level!', data[random_], d[2], d[1], links[0], links[1], links[2], tag))
               })
             })
         break;
@@ -320,10 +354,11 @@ https://github.com/kimsj5025/Team-battle-bot.git`)
 }); //client.on
 
 
-client.login(config.token);
+client.login(process.env.TOKEN);
+//process.env.TOKEN
+//config.token
 
-
-function embed(title, lev_code, lev_name, style, link1, link2, link3) {
+function embed(title, lev_code, lev_name, style, link1, link2, link3, tag) {
 return {embed: {
   color: 3447003,
   author: {
@@ -331,7 +366,7 @@ return {embed: {
     icon_url: client.user.avatarURL()
   },
   title: lev_code,
-  description: `title is \`${lev_name}\``,
+  description: lev_name,
   fields: [{
     name: "style",
     value: style
@@ -339,6 +374,10 @@ return {embed: {
   {
     name: "Clear vids",
     value: `[:clapper:](${link1}) [:clapper:](${link2}) [:clapper:](${link3})`
+  },
+  {
+    name: "tags",
+    value: tag
   }
   ],
   timestamp: new Date(),
