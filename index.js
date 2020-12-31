@@ -250,6 +250,9 @@ https://github.com/kimsj5025/Team-battle-bot.git`)
       case '!ping':
         msg.channel.send('Pong! `' + Math.floor(client.uptime) + ' ms`')
         break;
+      case '!embed':
+    msg.channel.send(embed('title', 'aaa-aaa-aaa','good_level', '3DW', 'https://naver.com', 'https://naver.com'))
+        break;
     }
 
 
@@ -267,4 +270,32 @@ https://github.com/kimsj5025/Team-battle-bot.git`)
 }); //client.on
 
 
-client.login(process.env.TOKEN);
+client.login('Nzc4NTg1MDQyMzg5NTY1NDYw.X7UH0w.mAGQVDJoXn8T3QuhMxsrdnDjrYU');
+
+
+function embed(title, lev_code, lev_name, style, link1, link2, link3) {
+return {embed: {
+  color: 3447003,
+  author: {
+    name: title,
+    icon_url: client.user.avatarURL()
+  },
+  title: lev_code,
+  description: `title is \`${lev_name}\``,
+  fields: [{
+    name: "style",
+    value: style
+  },
+  {
+    name: "Clear vids",
+    value: `[:clapper:](${link1})[:clapper:](${link2})[:clapper:](${link3})`
+  }
+  ],
+  timestamp: new Date(),
+  footer: {
+    icon_url: client.user.avatarURL(),
+    text: "© Team battle bot"
+  }
+}//embed
+}//return ;
+}//function
