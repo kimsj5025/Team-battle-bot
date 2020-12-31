@@ -202,23 +202,28 @@ level title is \`${data[2]}\`
               var random_ = Math.floor(random * data.length)
               fs.readFile(`./info/${data[random_]}`, 'utf8', function(e, d) {
                 var d = d.split('\n')
-                var sentence = `
-level\'s code is \`${data[random_]}\`
-Made by \`${d[3]}\`
-Level style is \`${d[1]}\`
-level title is \`${d[2]}\`
-      `
-                msg.channel.send(`<@${msg.author.id}>,${sentence}`)
+                var link = fs.readFileSync(`./vid/${data[random_]}`, 'utf8')
+                var links = link.split('\n')
+                msg.channel.send(embed('Random level!', data[random_], d[2], d[1], links[0], links[1], links[2]))
               })
             })
         break;
+
+
+
       case '!code':
       msg.channel.send(`Team battle bot\'s source code is
 https://github.com/kimsj5025/Team-battle-bot.git`)
         break;
+
+
+
       case '!msg':
         console.log(msg)
         break;
+
+
+
       case '!list':
         fs.readdir('./info', function(e, filelist){
         if (filelist === '') {
@@ -241,7 +246,13 @@ https://github.com/kimsj5025/Team-battle-bot.git`)
           }
         }
       })
+
+
+
         break;
+
+
+
       case '!help':
       msg.channel.send(`!add - submit level
 
@@ -292,7 +303,7 @@ return {embed: {
   },
   {
     name: "Clear vids",
-    value: `[:clapper:](${link1})[:clapper:](${link2})[:clapper:](${link3})`
+    value: `[:clapper:](${link1}) [:clapper:](${link2}) [:clapper:](${link3})`
   }
   ],
   timestamp: new Date(),
