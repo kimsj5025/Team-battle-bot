@@ -3,6 +3,10 @@ var client = new Discord.Client(); // 새로운 디스코드 클라이언트를 
 var fs = require('fs'); //fs 파일을 불러옴
 var i = 0
 var e = ''
+const config = require('./config');
+
+
+
 fs.mkdir('./info',{}, function () {
   console.log(`mkdir './info'`);
 })
