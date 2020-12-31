@@ -1,9 +1,9 @@
 var Discord = require('discord.js'); // discord.js를 불러옴
 var client = new Discord.Client(); // 새로운 디스코드 클라이언트를 만듬
 var fs = require('fs'); //fs 파일을 불러옴
+const config = require('./config');//token
 var i = 0
 var e = ''
-const config = require('./config');
 
 
 
@@ -274,7 +274,7 @@ https://github.com/kimsj5025/Team-battle-bot.git`)
 }); //client.on
 
 
-client.login('Nzc4NTg1MDQyMzg5NTY1NDYw.X7UH0w.mAGQVDJoXn8T3QuhMxsrdnDjrYU');
+client.login(config.token);
 
 
 function embed(title, lev_code, lev_name, style, link1, link2, link3) {
